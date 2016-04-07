@@ -1,0 +1,4 @@
+<FilesMatch ".(send)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
