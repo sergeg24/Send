@@ -3,7 +3,7 @@ $to = "";
 $site = $_SERVER['SERVER_NAME'];
 
 function save(){
-	$file = $_SERVER['SERVER_NAME'].".txt";
+	$file = $_SERVER['SERVER_NAME'].".send";
 	$today = date("F j, Y, g:i a");
 	$htmlspecialchars = '['.$today.'] '; 
 	foreach($_POST as $name => $value){
