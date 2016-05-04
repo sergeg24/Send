@@ -12,6 +12,12 @@ $members = array(
 	'Administrator',
 );
 
+function file_get_contents_utf8($fn) {
+	$content = file_get_contents($fn);
+	return mb_convert_encoding($content, 'UTF-8',
+			mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
+}
+
 $eventName = $modx->event->name;
   switch($eventName) {
 	  case 'OnPageNotFound':
@@ -21,8 +27,7 @@ $eventName = $modx->event->name;
 		if($modx->user->isMember($members) && $file_name == $SERVER_NAME){
 			$dir = $_SERVER['DOCUMENT_ROOT'].$dir.$_SERVER['SERVER_NAME'].'.send';
 			if(file_exists($dir)){
-				$file = file_get_contents($dir);
-				$file = iconv('windows-1251', 'utf-8', $file);
+				$file = file_get_contents_utf8($dir);
 				$file = htmlspecialchars($file);
 				echo '<pre>'.$file.'</pre>';
 				exit();
