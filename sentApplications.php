@@ -34,6 +34,7 @@ $eventName = $modx->event->name;
 				file_force_download($dir);
 			}
 			if(file_exists($dir)){
+				//$file = file_get_contents_utf8($file);
 				$file = iconv('windows-1251', 'utf-8', $file);
 				$file = htmlspecialchars($file);
 				echo "<em>version ".$version."</em>";
