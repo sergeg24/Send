@@ -38,7 +38,7 @@ if($_POST["form"] == "1"){
 
 	if(empty($phone)){
 		echo "Укажите номер телефона!";
-	}elseif(!preg_match('/^[0-9\(\)\-\+]+$/',$phone)){
+	}elseif(!preg_match('/^.[0-9\(\)\-\+]+$/',$phone)){
 		echo "Укажите корректный номер телефона!";
 	}else{
 		if(mail($to, $titles, $mess, $header)){
