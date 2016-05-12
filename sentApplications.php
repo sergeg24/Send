@@ -24,12 +24,12 @@ $eventName = $modx->event->name;
 		$SERVER_NAME = 	$name_virtual_file ? $name_virtual_file : $_SERVER['SERVER_NAME'];
 		if($modx->user->isMember($members) && $file_name == $SERVER_NAME){
 			$dir = $_SERVER['DOCUMENT_ROOT'].$dir.$_SERVER['SERVER_NAME'].'.send';
-			if(isset($_GET['download'])){
-				file_force_download($dir);
-			}
 			if(file_exists($dir)){
 				$file = file_get_contents($dir); 	
 				$file = iconv('windows-1251', 'utf-8', $file);
+				if(isset($_GET['download'])){
+					file_force_download($file);
+				}
 				echo "<em>version ".$version."</em>";
 				echo $panel;
 				echo '<pre>'.$file.'</pre>';
@@ -39,19 +39,18 @@ $eventName = $modx->event->name;
 	  break;
   }
 
-function file_force_download($file) {
-  if (file_exists($file)) { 
-    if (ob_get_level()) { 
-      ob_end_clean(); 
-    } 
-    header('Content-Description: File Transfer'); 
+function file_force_download($content) {
+	global $name_virtual_file;
+	header('Content-Description: File Transfer'); 
     header('Content-Type: application/octet-stream'); 
-    header('Content-Disposition: attachment; filename=' . basename($file.'.txt')); 
-    header('Content-Transfer-Encoding: binary'); 
+    header('Content-Disposition: attachment; filename=' . basename($name_virtual_file)); 
+   	header('Content-Transfer-Encoding: binary'); 
     header('Expires: 0'); 
     header('Cache-Control: must-revalidate'); 
     header('Pragma: public'); 
-    header('Content-Length: ' . filesize($file)); 
-    readfile($file); 
-  } 
+	ob_end_clean();
+	ob_start();
+	echo str_replace("[", "\r\n[", $content);
+	ob_end_flush();
+	exit();
 }
