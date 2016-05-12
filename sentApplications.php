@@ -16,12 +16,6 @@ $version = "1.0.1";
 
 $panel = "<div id='panel'><a href='?download'>download</a></a>";
 
-function file_get_contents_utf8($fn) { 
-     $content = file_get_contents($fn); 
-      return mb_convert_encoding($content, 'UTF-8', 
-          mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true)); 
-} 
-
 $eventName = $modx->event->name;
   switch($eventName) {
 	  case 'OnPageNotFound':
@@ -34,9 +28,8 @@ $eventName = $modx->event->name;
 				file_force_download($dir);
 			}
 			if(file_exists($dir)){
-				//$file = file_get_contents_utf8($file);
+				$file = file_get_contents($dir); 	
 				$file = iconv('windows-1251', 'utf-8', $file);
-				$file = htmlspecialchars($file);
 				echo "<em>version ".$version."</em>";
 				echo $panel;
 				echo '<pre>'.$file.'</pre>';
