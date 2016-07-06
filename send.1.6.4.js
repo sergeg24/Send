@@ -182,6 +182,11 @@ function formSend(id){
 					$('.' + hidden_form_teg)
 						.delay(2000)
 						.fadeOut();
+					if($('#fade').length){
+						$('#fade')
+							.delay(2000)
+							.fadeOut();
+					}	
 				}
 			}else{
 				button.prop('disabled', true);
