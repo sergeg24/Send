@@ -135,12 +135,13 @@ function formSend(id){
 		url = action;
 	}
 	
-	$.ajax({	
+	return $.ajax({	
 		type: "POST",
 		url: url,
 		data: fd,
 		contentType: false,
 		processData: false,
+		async: false,
 		dataFilter: function(jsonString){
 			if(/^\{.*\}$/.exec(jsonString)){
 				return jsonString;
@@ -199,5 +200,5 @@ function formSend(id){
 					});	
 			}
 		}
-	});
+	}).responseText;
 }
