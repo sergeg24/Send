@@ -135,13 +135,19 @@ function formSend(id){
 		url = action;
 	}
 	
-	return $.ajax({	
+	var isFORM = function(formTegId){
+		if($(formTegId)[0].tagName == 'FORM'){
+			return true;
+		}
+		return false;
+	}
+	
+	$.ajax({	
 		type: "POST",
 		url: url,
 		data: fd,
 		contentType: false,
 		processData: false,
-		async: false,
 		dataFilter: function(jsonString){
 			if(/^\{.*\}$/.exec(jsonString)){
 				return jsonString;
@@ -166,7 +172,20 @@ function formSend(id){
 			}
 			if(send){
 				button.prop('disabled', true);
-				$(formTegId).trigger('reset');
+				if(isFORM(formTegId)){
+					$(formTegId).trigger('reset');
+				}else{
+					var elf = $(formTegId).find('input, textarea, select');
+					var typeEL;
+					elf.each(function(){
+						typeEL = $(this)[0].type;
+						if(typeEL == 'text' || typeEL == 'textarea' || typeEL == 'select-one' || typeEL == 'file'){
+							$(this).val('');
+						}else if(typeEL == 'checkbox' || typeEL == 'radio'){
+							$(this).prop('checked', false);
+						}
+					});
+				}
 				input.removeClass(classValid);
 				$(idResult).append(result_text);
 				$(idResult+" .good")
@@ -200,5 +219,5 @@ function formSend(id){
 					});	
 			}
 		}
-	}).responseText;
+	});
 }
