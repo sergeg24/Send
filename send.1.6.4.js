@@ -188,7 +188,7 @@ function formSend(id){
 				}
 				input.removeClass(classValid);
 				$(idResult).append(result_text);
-				$(idResult+" .good")
+				$(idResult + " .good")
 					.fadeIn()
 					.delay(2000)
 					.fadeOut();
