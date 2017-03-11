@@ -3,48 +3,48 @@ $to = "";
 $site = $_SERVER['SERVER_NAME'];
 
 function save(){
-	$file = $_SERVER['SERVER_NAME'].".send";
-	$today = date("F j, Y, g:i a");
-	$htmlspecialchars = '['.$today.'] '; 
-	foreach($_POST as $name => $value){
-		if($value!='undefined' && $value!=''){
-			$htmlspecialchars .= $name.":".$value."|";
-		}
-	}
-	$htmlspecialchars = substr($htmlspecialchars,0,-1)."\n";
-	if($fopen = fopen($file, "a+")){
-		fwrite($fopen, iconv("UTF-8", "WINDOWS-1251", $htmlspecialchars));
-		}
-	fclose($fopen);
+    $file = $_SERVER['SERVER_NAME'].".send";
+    $today = date("F j, Y, g:i a");
+    $htmlspecialchars = '['.$today.'] ';
+    foreach($_POST as $name => $value){
+        if($value!='undefined' && $value!=''){
+            $htmlspecialchars .= $name.":".$value."|";
+        }
+    }
+    $htmlspecialchars = substr($htmlspecialchars,0,-1)."\n";
+    if($fopen = fopen($file, "a+")){
+        fwrite($fopen, iconv("UTF-8", "WINDOWS-1251", $htmlspecialchars));
+    }
+    fclose($fopen);
 }
 
 
 if($_POST["form"] == "1"){
 
-	$name  =  $_POST['name'];
-	$phone = $_POST['phone'];
-	
-	$titles = "Заявка с формы (Заказать звонок) с сайта ".$site;
-	
-	$mess  = "<body><b>".$titles."</b><br />";
-	$mess .= "<br />";
-	$mess .= "<b>Контактные данные:</b><br />";
-	$mess .= "Имя: <br />" . $name . "<br />";
-	$mess .= "Телефон: <br />" ."+".$phone . "<br />";
+    $name  =  $_POST['name'];
+    $phone = $_POST['phone'];
 
-	$header="Content-type: text/html; charset=\"utf-8\"\n";
-	$header .="From: ". $site . "<".$site.">\n";
-	$header .="Subject: " . $titles . "\n";
+    $titles = "Р—Р°СЏРІРєР° СЃ С„РѕСЂРјС‹ (Р—Р°РєР°Р·Р°С‚СЊ Р·РІРѕРЅРѕРє) СЃ СЃР°Р№С‚Р° ".$site;
 
-	if(empty($phone)){
-		echo "Укажите номер телефона!";
-	}elseif(!preg_match('/^.[0-9\(\)\-\+]+$/',$phone)){
-		echo "Укажите корректный номер телефона!";
-	}else{
-		if(mail($to, $titles, $mess, $header)){
-				echo "1";
-		}else{
-			echo "Не удалось отправить сообщение!";
-		}
-	}
+    $mess  = "<body><b>".$titles."</b><br />";
+    $mess .= "<br />";
+    $mess .= "<b>РљРѕРЅС‚Р°РєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ:</b><br />";
+    $mess .= "РРјСЏ: <br />" . $name . "<br />";
+    $mess .= "РўРµР»РµС„РѕРЅ: <br />" ."+".$phone . "<br />";
+
+    $header="Content-type: text/html; charset=\"utf-8\"\n";
+    $header .="From: ". $site . "<".$site.">\n";
+    $header .="Subject: " . $titles . "\n";
+
+    if(empty($phone)){
+        echo "РЈРєР°Р¶РёС‚Рµ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°!";
+    }elseif(!preg_match('/^.[0-9\(\)\-\+]+$/',$phone)){
+        echo "РЈРєР°Р¶РёС‚Рµ РєРѕСЂСЂРµРєС‚РЅС‹Р№ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°!";
+    }else{
+        if(mail($to, $titles, $mess, $header)){
+            echo "1";
+        }else{
+            echo "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РїСЂР°РІРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ!";
+        }
+    }
 }
