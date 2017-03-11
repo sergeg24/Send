@@ -1,26 +1,25 @@
 //version 1.6.4
 //manual: http://ima-pr.ru/js/archives/send/
 //onclick="formSend(id);return false;";
-function formSend(id){
+function formSend(id) {
 	var inputVal,countCheck,type,typeInp='',button,max_upload_file,c,name,checked_obj,default_message,objectElement,url,input,label,fNameA,emptyElement,formTegId,test,
 	idInp,one,fieldNameA,nameArray,requestRequired,checked,val,classErr,classValid,patternID = /_[^|]*$/i,ElementShift,idResult,fd,file_data,
-	classResult,send_request_always,elementId,countElement,request,hidden_form_teg = 'hide_'+id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+	send_request_always,elementId,countElement,request,hidden_form_teg = 'hide_' + id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 	/*~~~OPTION~~~*/
 	url = "/js/archives/send/send-test.php";//путь до файла отправки почты	
 	max_upload_file = 2;//максимально допустимый размер загружаемого файла (Мб)
-	formTegId = "#form_"+id;//id на тег <form>	
-	idResult = "#result_"+id;//вывод результата в блок	
-	classResult = "result";//доп. класс. Вставляется на блок "idResult"	
+	formTegId = "#form_" + id;//id на тег <form>
+	idResult = "#result_" + id;//вывод результата в блок
 	send_request_always = true;//(true) всегда отправляет запрос к обработчику, даже если заполнены не все обязательные поля		
 	one = "1";//то что толжен вернуть обработчик в случае успешной проверки формы (echo "1";)	
 	classErr = "f_err";//класс пустого поля		
 	classValid = "f_valid";//класс заполненного поля		
 	default_message = {
-		"no_id":"Укажите id формы!",
-		"good":"<div class='good'><span>Сообщение успешно отправлено!</span></div>"
+		"no_id": "Укажите id формы!",
+		"good": "<div class='good'><span>Сообщение успешно отправлено!</span></div>"
 	};
 	/*~~~OPTION~~~*/
-	if($.type(id) === 'undefined' || id == ''){
+	if ($.type(id) === 'undefined' || id == '') {
 		console.log(default_message.no_id);
 		return false;
 	}
@@ -32,62 +31,62 @@ function formSend(id){
 	request = [];
 	button = $(formTegId + ' input[type="submit"],'+formTegId+' button');
 	//Собираем все поля в два массива, все поля и обязательные поля
-	$(formTegId + " *").each(function(){
+	$(formTegId + " *").each(function() {
 		objectElement = $(this);
 		elementId = objectElement.attr("id");
-		if($.type(elementId) !== 'undefined'){
-			if($(this).hasClass( "required" )){
+		if ($.type(elementId) !== 'undefined') {
+			if ($(this).hasClass( "required" )) {
 				requestRequired.push("#"+elementId);
 			}
 			type = $(this)[0].type;
-			if($.type(type) !== 'undefined'){
+			if ($.type(type) !== 'undefined') {
 				typeInp = "|" + $(this)[0].type;
-			}else{
+			} else {
 				typeInp = '';
 			}
 			request.push(elementId + typeInp);
 		}				
 	});
-	if($('body').find('.' + hidden_form_teg)){
+	if ($('body').find('.' + hidden_form_teg)) {
 		hidden_form = true;
 		$('.' + hidden_form_teg).show();
 	}
 	//подгатавливаем ВСЕ запросы
-	for (var i = 0; i < request.length; i++){
+	for (var i = 0; i < request.length; i++) {
 		fieldNameA = request[i];
 		nameArray = fieldNameA.split("|");
 		name = nameArray[0].replace(patternID,'');
 		type = nameArray[1];
 		countCheck = nameArray.length;
-		if(type == 'checkbox'){
+		if (type == 'checkbox') {
 			checked_obj = $("#"+nameArray[0]+":checkbox:checked");	
 			c = 1;
-		}else if(type == 'radio'){
+		} else if (type == 'radio') {
 			checked_obj = $("#"+nameArray[0]+":radio:checked");
 			c = 1;
-		}else{
+		} else {
 			val = $("#"+nameArray[0]).val();
 			c = 0;
 		}	
-		if(c){
+		if (c) {
 			checked = checked_obj.length;
-			if(checked == 1){
+			if (checked == 1) {
 				$("#"+nameArray[0]).val(1);
-			}else{
+            } else {
 				$("#"+nameArray[0]).val('');
 			}
 			val = checked;
 		}	
-		if(type == 'file'){
+		if (type == 'file') {
 			file_data = $("#"+nameArray[0]).prop('files')[0];
-			if($.type(file_data) !== 'undefined'){
-				if(max_upload_file * 1000000 < file_data.size){
+			if ($.type(file_data) !== 'undefined') {
+				if (max_upload_file * 1000000 < file_data.size) {
 					$("#"+nameArray[0]).val('');
 				}
 				fd.append(name, file_data);
 			}	
 		}
-		if(countCheck == 1) continue;
+		if (countCheck == 1) continue;
 		fd.append(name, val);
 	}
 	//производим проверку обязательных полей
