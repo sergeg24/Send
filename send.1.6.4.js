@@ -2,7 +2,7 @@
 //manual: http://ima-pr.ru/js/archives/send/
 //onclick="formSend(id);return false;";
 function formSend(id){
-	var inputVal,fieldName='',countCheck,type,typeInp='',button,max_upload_file,c,name,checked_obj,default_message,objectElement,url,input,label,fNameA,emptyElement,formTegId,test,
+	var inputVal,countCheck,type,typeInp='',button,max_upload_file,c,name,checked_obj,default_message,objectElement,url,input,label,fNameA,emptyElement,formTegId,test,
 	idInp,one,fieldNameA,nameArray,requestRequired,checked,val,classErr,classValid,patternID = /_[^|]*$/i,ElementShift,idResult,fd,file_data,
 	classResult,send_request_always,elementId,countElement,request,hidden_form_teg = 'hide_'+id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 	/*~~~OPTION~~~*/
