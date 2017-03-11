@@ -186,7 +186,9 @@ function formSend(id){
 						}
 					});
 				}
-				input.removeClass(classValid);
+                if ($.type(input) != 'undefined') {
+                    input.removeClass(classValid);
+                }
 				$(idResult).append(result_text);
 				$(idResult + " .good")
 					.fadeIn()
