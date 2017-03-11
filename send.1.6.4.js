@@ -1,4 +1,4 @@
-//version 1.6.4
+//version 1.6.4.1
 //manual: http://ima-pr.ru/js/archives/send/
 //onclick="formSend(id);return false;";
 function formSend(id) {
