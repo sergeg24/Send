@@ -91,52 +91,51 @@ function formSend(id){
 		fd.append(name, val);
 	}
 	//производим проверку обязательных полей
-	for (var i = 0; i < requestRequired.length; i++){
+	for (var i = 0; i < requestRequired.length; i++) {
 		countElement++;
 		idInp = requestRequired[i];
 		input = $(idInp);
 		inputVal = input.val();	
 		fNameA = idInp.replace(patternID,'');				
-	if(inputVal==""){
+	if (inputVal=="") {
 		test.unshift(idInp);
 		input.addClass(classErr).removeClass(classValid);						
 		$(idInp + " + label").remove();
-	}else if(fNameA == "#email" || fNameA == "#mail"){
-		if(!patternEmail.test($(idInp).val())){
+	} else if (fNameA == "#email" || fNameA == "#mail") {
+		if (!patternEmail.test($(idInp).val())) {
 			test.unshift(idInp);
 			input.addClass(classErr).removeClass(classValid);						
 			$(idInp + " + label").remove();
-		}else{
+		} else {
 			input.addClass(classValid).removeClass(classErr);						
 			$(idInp + " + label").remove();
 		}	
-	}else{
+	} else {
 			input.addClass(classValid).removeClass(classErr);
 			$(idInp + " + label").remove();
 		}
 	} 
 	emptyElement = test.reverse();
 	ElementShift = emptyElement.shift();//id		
-	if($.type(ElementShift) != 'undefined'){
-		if($.type($(ElementShift).attr('title')) != 'undefined'){
+	if ($.type(ElementShift) != 'undefined') {
+		if ($.type($(ElementShift).attr('title')) != 'undefined') {
 			label = "<label class='messageLabel'>Заполните поле: <span>" + $(ElementShift).attr('title') + "!</span></label>";
 		}
 		$(ElementShift).focus().after(label);
-		if(send_request_always == false){
+		if (send_request_always == false) {
 			return false;
 		}
 	}
 	var result_text = '';
 	var send = false;
-	
 	var action = $(formTegId).attr('action');
-	
-	if(action != '' && $.type(action) !== 'undefined'){
+
+	if (action != '' && $.type(action) !== 'undefined') {
 		url = action;
 	}
 	
 	var isFORM = function(formTegId){
-		if($(formTegId)[0].tagName == 'FORM'){
+		if ($(formTegId)[0].tagName == 'FORM') {
 			return true;
 		}
 		return false;
@@ -148,40 +147,40 @@ function formSend(id){
 		data: fd,
 		contentType: false,
 		processData: false,
-		dataFilter: function(jsonString){
-			if(/^\{.*\}$/.exec(jsonString)){
+		dataFilter: function(jsonString) {
+			if (/^\{.*\}$/.exec(jsonString)) {
 				return jsonString;
-			}else{
+			} else {
 				var event = {};
-				if(jsonString == one){
+				if (jsonString == one) {
 					event.good = default_message.good;
-				}else{	
+				} else {
 					event.error = jsonString;
 				}
 				return JSON.stringify(event);
 			}
 		},
 		dataType: "json",	
-		success: function(data){
+		success: function(data) {
 			$(idResult).empty();	
-			if($.type(data.good) !== 'undefined'){
+			if ($.type(data.good) !== 'undefined') {
 				result_text = data.good;
 				send = true;
-			}else if($.type(data.error) !== 'undefined'){
+			} else if ($.type(data.error) !== 'undefined') {
 				result_text = data.error;
 			}
-			if(send){
+			if (send) {
 				button.prop('disabled', true);
-				if(isFORM(formTegId)){
+				if (isFORM(formTegId)) {
 					$(formTegId).trigger('reset');
-				}else{
+				} else {
 					var elf = $(formTegId).find('input, textarea, select');
 					var typeEL;
-					elf.each(function(){
+					elf.each(function() {
 						typeEL = $(this)[0].type;
-						if(typeEL == 'text' || typeEL == 'textarea' || typeEL == 'select-one' || typeEL == 'file'){
+						if (typeEL == 'text' || typeEL == 'textarea' || typeEL == 'select-one' || typeEL == 'file') {
 							$(this).val('');
-						}else if(typeEL == 'checkbox' || typeEL == 'radio'){
+						} else if (typeEL == 'checkbox' || typeEL == 'radio') {
 							$(this).prop('checked', false);
 						}
 					});
@@ -200,17 +199,17 @@ function formSend(id){
 					.fadeOut('show', function(){
 						button.prop('disabled', false);
 					});
-				if(hidden_form){
+				if (hidden_form) {
 					$('.' + hidden_form_teg)
 						.delay(2000)
 						.fadeOut();
-					if($('#fade').length){
+					if ($('#fade').length) {
 						$('#fade')
 							.delay(2000)
 							.fadeOut();
 					}	
 				}
-			}else{
+			} else {
 				button.prop('disabled', true);
 				$(idResult)
 					.fadeIn()
@@ -218,7 +217,7 @@ function formSend(id){
 					.delay(2000)
 					.fadeOut('show', function(){
 						button.prop('disabled', false);
-					});	
+					});
 			}
 		}
 	});
