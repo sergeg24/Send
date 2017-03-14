@@ -1,24 +1,25 @@
 //version 1.6.4.1
 //manual: http://ima-pr.ru/js/archives/send/
-//onclick="formSend(id);return false;";
+//onclick="formSend(id);return false;";234234
 function formSend(id) {
-	var inputVal,countCheck,type,typeInp='',button,max_upload_file,c,name,checked_obj,default_message,objectElement,url,input,label,fNameA,emptyElement,formTegId,test,
-	idInp,one,fieldNameA,nameArray,requestRequired,checked,val,classErr,classValid,patternID = /_[^|]*$/i,ElementShift,idResult,fd,file_data,
-	send_request_always,elementId,countElement,request,hidden_form_teg = 'hide_' + id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 	/*~~~OPTION~~~*/
-	url = "/js/archives/send/send-test.php";//путь до файла отправки почты	
-	max_upload_file = 2;//максимально допустимый размер загружаемого файла (Мб)
+    var url = "/js/archives/send/send-test.php",//путь до файла отправки почты
+	good_msg = "Сообщение успешно отправлено!",
+    send_request_always = true,//(true) всегда отправляет запрос к обработчику, даже если заполнены не все обязательные поля
+    max_upload_file = 2,//максимально допустимый размер загружаемого файла (Мб)
+	/*~~~OPTION~~~*/
+	inputVal,countCheck,type,typeInp='',button,c,name,checked_obj,default_message,objectElement,input,label,fNameA,emptyElement,formTegId,test,
+	idInp,one,fieldNameA,nameArray,requestRequired,checked,val,classErr,classValid,patternID = /_[^|]*$/i,ElementShift,idResult,fd,file_data,
+	elementId,countElement,request,hidden_form_teg = 'hide_' + id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
 	formTegId = "#form_" + id;//id на тег <form>
 	idResult = "#result_" + id;//вывод результата в блок
-	send_request_always = true;//(true) всегда отправляет запрос к обработчику, даже если заполнены не все обязательные поля		
 	one = "1";//то что толжен вернуть обработчик в случае успешной проверки формы (echo "1";)	
 	classErr = "f_err";//класс пустого поля		
 	classValid = "f_valid";//класс заполненного поля		
 	default_message = {
 		"no_id": "Укажите id формы!",
-		"good": "<div class='good'><span>Сообщение успешно отправлено!</span></div>"
+		"good": "<div class='good'><span>" + good_msg + "</span></div>"
 	};
-	/*~~~OPTION~~~*/
 	if ($.type(id) === 'undefined' || id == '') {
 		console.log(default_message.no_id);
 		return false;
