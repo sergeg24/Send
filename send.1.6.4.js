@@ -139,8 +139,7 @@ function formSend(id) {
 		}
 		return false;
 	}
-	
-	$.ajax({	
+	$.ajax({
 		type: "POST",
 		url: url,
 		data: fd,
@@ -218,6 +217,14 @@ function formSend(id) {
 						button.prop('disabled', false);
 					});
 			}
+			var formData = {};
+            for (key of fd.keys()) formData[key] = fd.get(key);
+            $(document).trigger( "send", {
+                'id': id,
+                'send': send,
+                'data': data,
+				'formData': formData,
+            });
 		}
 	});
 }
