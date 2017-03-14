@@ -34,28 +34,42 @@ Version 1.6.4 (совместим с 1.6.*)
     <title>send</title>
     <meta charset='utf-8' />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="/js/send.1.6.4.js"></script>
+	<script src="/js/send.{$version}.js"></script>
 </head>
 <body>
-
 	<form id="form_1" class="hide_1">
+	
 	<input type="text" id="name_1"  class="required" placeholder="Имя" title='Имя'><br/>
+	
 	<input type="text" id="email_1" class="required" placeholder="E-mail" title='E-mail'><br/>
+	
 	<input type="text" id="phone_1" title='Телефон' placeholder="+7(___)___-__-__"><br/>
+	
 	<select id="select_1" class="required" title='Доп. поле'>
 		<option value=''>-</option>
 		<option value='1'>Один</option>
 		<option value='2'>Два</option>
-	</select><br/>
+	</select>
+	
+	<br/>
+	
 	<input type="file" id="file_1" title="Документ" class="required"><br/>
+	
 	1)Тут можно выбрать checkbox: <input type="checkbox" id="checkbox_1" class="required" title='checkbox' value=""><br/>
+	
 	2)Тут можно выбрать checkbox: <input type="checkbox" id="checkbox2_1" title='checkbox' value=""><br/>
+	
 	1)Тут можно выбрать radio:<input type="radio" id="radio1_1" name="radio" title='radio' value=""><br/>
+	
 	2)Тут можно выбрать radio:<input type="radio" id="radio2_1" name="radio" title='radio' value=""><br/>
+	
 	<textarea maxlength="500" id="message_1" class="" placeholder="Интересующая техника, оборудование или запчасти."></textarea><br/>
+	
 	<input type="submit" onclick="formSend(1); return false;" value="Отправить вопрос"> 
+	
 	<div id="result_1"></div>
+	
 	</form>
-  
+
 </body>
-</html>	
+</html>
