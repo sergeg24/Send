@@ -53,7 +53,7 @@ Version 1.6.4 (совместим с 1.6.*)
 	1)Тут можно выбрать radio:<input type="radio" id="radio1_1" name="radio" title='radio' value=""><br/>
 	2)Тут можно выбрать radio:<input type="radio" id="radio2_1" name="radio" title='radio' value=""><br/>
 	<textarea maxlength="500" id="message_1" class="" placeholder="Интересующая техника, оборудование или запчасти."></textarea><br/>
-	<input type="submit" value="Отправить вопрос"> 
+	<input type="submit" onclick="formSend(1); return false;" value="Отправить вопрос"> 
 	<div id="result_1"></div>
 	</form>
   
