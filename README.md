@@ -29,8 +29,11 @@ Version 1.6.4 (совместим с 1.6.*)
 Код HTML:
 
 <!doctype html>
+
 <html>
+
     <head>
+    
     <title>send</title>
     
     <meta charset='utf-8' />
@@ -40,7 +43,9 @@ Version 1.6.4 (совместим с 1.6.*)
     <script src="/js/send.1.6.4.js"></script>
     
 </head>
+
 <body>
+
 	<form id="form_1" class="hide_1">
 	
 	<input type="text" id="name_1"  class="required" placeholder="Имя" title='Имя'><br/>
@@ -76,4 +81,5 @@ Version 1.6.4 (совместим с 1.6.*)
 	</form>
 
 </body>
+
 </html>
