@@ -18,7 +18,6 @@ function save(){
     fclose($fopen);
 }
 
-
 if($_POST["form"] == "1"){
 
     $name  =  $_POST['name'];
@@ -32,13 +31,13 @@ if($_POST["form"] == "1"){
     $mess .= "Имя: <br />" . $name . "<br />";
     $mess .= "Телефон: <br />" ."+".$phone . "<br />";
 
-    $header="Content-type: text/html; charset=\"utf-8\"\n";
-    $header .="From: ". $site . "<".$site.">\n";
+    $header  ="Content-type: text/html; charset=\"utf-8\"\n";
+    $header .="From: ". $site . "<info@".$site.">\n";
     $header .="Subject: " . $titles . "\n";
 
     if(empty($phone)){
         echo "Укажите номер телефона!";
-    }elseif(!preg_match('/^.[0-9\(\)\-\+]+$/',$phone)){
+    }elseif(!preg_match('/^[0-9\(\)\-\+]+$/',$phone)){
         echo "Укажите корректный номер телефона!";
     }else{
         if(mail($to, $titles, $mess, $header)){
