@@ -3,19 +3,19 @@
 //onclick="formSend(id);return false;"
 function formSend(id) {
 	/*~~~OPTION~~~*/
-    var url = "/js/archives/send/send-test.php",//путь до файла отправки почты
-	good_msg = "Сообщение успешно отправлено!",
+    var url      		= "/js/archives/send/send-test.php",//путь до файла отправки почты
+	good_msg 			= "Сообщение успешно отправлено!",
     send_request_always = true,//(true) всегда отправляет запрос к обработчику, даже если заполнены не все обязательные поля
-    max_upload_file = 2,//максимально допустимый размер загружаемого файла (Мб)
+    max_upload_file     = 2,//максимально допустимый размер загружаемого файла (Мб)
 	/*~~~OPTION~~~*/
 	inputVal,countCheck,type,typeInp='',button,c,name,checked_obj,default_message,objectElement,input,label,fNameA,emptyElement,formTegId,test,
 	idInp,one,fieldNameA,nameArray,requestRequired,checked,val,classErr,classValid,patternID = /_[^|]*$/i,ElementShift,idResult,fd,file_data,
 	elementId,countElement,request,hidden_form_teg = 'hide_' + id,hidden_form = false,patternEmail = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-	formTegId = "#form_" + id;//id на тег <form>
-	idResult = "#result_" + id;//вывод результата в блок
-	one = "1";//то что толжен вернуть обработчик в случае успешной проверки формы (echo "1";)	
-	classErr = "f_err";//класс пустого поля		
-	classValid = "f_valid";//класс заполненного поля		
+	formTegId       = "#form_" + id;//id на тег <form>
+	idResult        = "#result_" + id;//вывод результата в блок
+	one             = "1";//то что толжен вернуть обработчик в случае успешной проверки формы (echo "1";)
+	classErr        = "f_err";//класс пустого поля
+	classValid      = "f_valid";//класс заполненного поля
 	default_message = {
 		"no_id": "Укажите id формы!",
 		"good": "<div class='good'><span>" + good_msg + "</span></div>"
@@ -26,11 +26,11 @@ function formSend(id) {
 	}
 	fd = new FormData($(formTegId)[0]);
 	fd.append("form", id);
-	countElement = 0;
-	test = [];
+	countElement    = 0;
+	test            = [];
 	requestRequired = [];
-	request = [];
-	button = $(formTegId + ' input[type="submit"],'+formTegId+' button');
+	request         = [];
+	button          = $(formTegId + ' input[type="submit"],'+formTegId+' button');
 	//Собираем все поля в два массива, все поля и обязательные поля
 	$(formTegId + " *").each(function() {
 		objectElement = $(this);
@@ -93,10 +93,10 @@ function formSend(id) {
 	//производим проверку обязательных полей
 	for (var i = 0; i < requestRequired.length; i++) {
 		countElement++;
-		idInp = requestRequired[i];
-		input = $(idInp);
+		idInp 	 = requestRequired[i];
+		input    = $(idInp);
 		inputVal = input.val();	
-		fNameA = idInp.replace(patternID,'');				
+		fNameA 	 = idInp.replace(patternID,'');
 	if (inputVal=="") {
 		test.unshift(idInp);
 		input.addClass(classErr).removeClass(classValid);						
@@ -127,8 +127,8 @@ function formSend(id) {
 		}
 	}
 	var result_text = '';
-	var send = false;
-	var action = $(formTegId).attr('action');
+	var send        = false;
+	var action      = $(formTegId).attr('action');
 
 	if (action != '' && $.type(action) !== 'undefined') {
 		url = action;
