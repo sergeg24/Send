@@ -34,7 +34,7 @@ Version 1.6.4 (совместим с 1.6.*)
     <title>send</title>
     <meta charset='utf-8' />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="/js/send.{$version}.js"></script>
+	<script src="/js/send.1.6.4.js"></script>
 </head>
 <body>
 	<form id="form_1" class="hide_1">
