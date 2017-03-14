@@ -1,6 +1,6 @@
 //version 1.6.4.1
 //manual: http://ima-pr.ru/js/archives/send/
-//onclick="formSend(id);return false;";
+//onclick="formSend(id);return false;"
 function formSend(id) {
 	/*~~~OPTION~~~*/
     var url = "/js/archives/send/send-test.php",//путь до файла отправки почты
